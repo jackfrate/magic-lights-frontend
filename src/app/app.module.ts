@@ -3,10 +3,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { LightHolderComponent } from './light/light-holder/light-holder.component';
+import { LightListComponent } from './light/light-list/light-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LightHolderComponent,
+    LightListComponent
   ],
   imports: [
     BrowserModule,
