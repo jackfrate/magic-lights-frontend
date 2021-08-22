@@ -4,7 +4,13 @@
         <mat-card-subtitle>IP: {{ip}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <color-chrome (onChangeComplete)="changeComplete($event)"></color-chrome>
-
+        <color-chrome [color]="color" (onChangeComplete)="changeComplete($event)"></color-chrome>
+        <p>Brightness</p>
+        <mat-slider
+            thumbLabel
+            min="0"
+            max="255"
+            [value]="255"
+        ></mat-slider>
     </mat-card-content>
 </mat-card>

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { RGBA } from 'ngx-color';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { BASE_IP, MessageRes } from 'src/stuff';
@@ -20,16 +21,20 @@ export class LightStatusService {
     return this.http.get<string[]>(`${BASE_IP}/ip_list`);
   }
 
-  changeColor(rgb: RGB, index: number): Observable<MessageRes> {
+  changeColor(rgb: RGBA, index: number): Observable<MessageRes> {
     return this.http.post<MessageRes>(`${BASE_IP}/light_color`, {
       r: rgb.r,
       g: rgb.g,
       b: rgb.b,
+      a: 255,
       index: index
     });
   }
 
-  changeBrigh(brightness: Brightness, index: number): Observable<MessageRes> {
+  changeBright(brightness: number | null, index: number): Observable<MessageRes> {
+    if (brightness === null) {
+      brightness = 255;
+    }
     return this.http.post<MessageRes>(`${BASE_IP}/light_color`, {
       bright: brightness,
       index: index
