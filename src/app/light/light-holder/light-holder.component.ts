@@ -5,7 +5,7 @@ import { interval, Observable, Subscription } from 'rxjs';
 import { LightStatus, RGB } from 'src/app/models/rgb';
 import { MessageRes } from 'src/stuff';
 import { LightStatusService } from '../light-status.service';
-import { throttle } from 'rxjs/operators';
+import { debounceTime, throttle, throttleTime } from 'rxjs/operators';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class LightHolderComponent {
   changeBrightness$: Subscription = new Subscription();
 
   color: RGBA = { r: 0, g: 0, b: 0, a: 255 };
-  brightness: number | null = 255;
+  brightness: number = 255;
 
   constructor(private lightSvc: LightStatusService) { }
 
@@ -53,11 +53,19 @@ export class LightHolderComponent {
 
   onSliderChange(event: MatSliderChange) {
     this.changeBrightness$ = this.lightSvc.changeBright(event.value, this.index)
+      .pipe(throttleTime(1000))
       .subscribe(
         value => {
-          this.brightness = event.value
+          this.brightness = event.value || 255
         }
       );
+  }
+
+  getBrightPercent(): string {
+    if (this.brightness < 1) {
+      return '0';
+    }
+    return ((this.brightness / 255) * 100).toFixed(0);
   }
 
   ngOnDestroy(): void {

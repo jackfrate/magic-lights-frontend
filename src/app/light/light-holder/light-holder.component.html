@@ -5,9 +5,9 @@
     </mat-card-header>
     <mat-card-content>
         <color-chrome [color]="color" (onChangeComplete)="changeComplete($event)"></color-chrome>
-        <p>Brightness</p>
+        <p>Brightness {{getBrightPercent()}}%</p>
         <mat-slider
-            min="0"
+            min="1"
             max="255"
             [value]="255"
             (input)="onSliderChange($event)"
