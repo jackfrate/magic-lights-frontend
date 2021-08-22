@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
-import { BASE_IP } from 'src/stuff';
+import { BASE_IP, MessageRes } from 'src/stuff';
 import { Brightness, LightStatus, RGB } from '../models/rgb';
 
 @Injectable({
@@ -20,8 +20,8 @@ export class LightStatusService {
     return this.http.get<string[]>(`${BASE_IP}/ip_list`);
   }
 
-  changeColor(rgb: RGB, index: number) {
-    return this.http.post(`${BASE_IP}/light_color`, {
+  changeColor(rgb: RGB, index: number): Observable<MessageRes> {
+    return this.http.post<MessageRes>(`${BASE_IP}/light_color`, {
       r: rgb.r,
       g: rgb.g,
       b: rgb.b,
@@ -29,8 +29,8 @@ export class LightStatusService {
     });
   }
 
-  changeBrigh(brightness: Brightness, index: number) {
-    return this.http.post(`${BASE_IP}/light_color`, {
+  changeBrigh(brightness: Brightness, index: number): Observable<MessageRes> {
+    return this.http.post<MessageRes>(`${BASE_IP}/light_color`, {
       bright: brightness,
       index: index
     });

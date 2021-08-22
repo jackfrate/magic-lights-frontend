@@ -1,7 +1,10 @@
 import { Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
-import { Observable } from 'rxjs';
-import { LightStatus } from 'src/app/models/rgb';
+import { ColorEvent } from 'ngx-color';
+import { Observable, Subscription } from 'rxjs';
+import { LightStatus, RGB } from 'src/app/models/rgb';
+import { MessageRes } from 'src/stuff';
 import { LightStatusService } from '../light-status.service';
+
 
 @Component({
   selector: 'app-light-holder',
@@ -10,21 +13,35 @@ import { LightStatusService } from '../light-status.service';
 })
 export class LightHolderComponent {
 
-  @Input() index: number | null = null;
+  @Input() index: number = -1;
   @Input() ip: string = 'NONE';
   status$: Observable<LightStatus>;
+  changeColor$: Subscription = new Subscription();
+
+  color: RGB = {r: 0, g: 0, b: 0};
+  brightness: number = 255;
 
   constructor(private lightSvc: LightStatusService) {
-    this.status$ = this.getStatus();
+    this.status$ = this.getStatus(); 
+    this.status$.subscribe( value => 
+      this.color = value
+    );
+
   }
 
   getStatus() {
-    // @ts-ignore
     return this.lightSvc.getStatus(this.index);
   }
 
-  showCard(): boolean {
-    return this.index !== null;
+  changeComplete($event: ColorEvent) {
+    this.changeColor$ = this.lightSvc.changeColor($event.color.rgb, this.index).subscribe(
+      value => this.color = $event.color.rgb
+    );
+    
+  }
+
+  ngOnDestroy(): void {
+    this.changeColor$.unsubscribe();
   }
 
 }

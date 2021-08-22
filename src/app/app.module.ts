@@ -14,7 +14,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import { ColorSketchModule } from 'ngx-color/sketch';
+import { ColorChromeModule } from 'ngx-color/chrome'; // <color-chrome></color-chrome>
 
 
 
@@ -34,6 +36,8 @@ import {MatCardModule} from '@angular/material/card';
     MatSlideToggleModule,
     MatToolbarModule,
     MatCardModule,
+    ColorSketchModule,
+    ColorChromeModule,
   ],
   providers: [
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }

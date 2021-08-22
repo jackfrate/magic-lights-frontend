@@ -3,4 +3,8 @@
         <mat-card-title>Light {{index}}</mat-card-title>
         <mat-card-subtitle>IP: {{ip}}</mat-card-subtitle>
     </mat-card-header>
+    <mat-card-content>
+        <color-chrome (onChangeComplete)="changeComplete($event)"></color-chrome>
+
+    </mat-card-content>
 </mat-card>
