@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
-import { BASE_IP, ListRes } from 'src/stuff';
+import { BASE_IP } from 'src/stuff';
 import { Brightness, LightStatus, RGB } from '../models/rgb';
 
 @Injectable({
@@ -37,7 +37,7 @@ export class LightStatusService {
   }
 
   getStatus(index: number): Observable<LightStatus> {
-    return this.http.get<LightStatus>(`${BASE_IP}/status/${index}`)
+    return this.http.get<LightStatus>(`${BASE_IP}/light_status/${index}`)
   }
 
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { LightStatusService } from '../light-status.service';
 
 @Component({
   selector: 'app-light-list',
@@ -6,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./light-list.component.scss']
 })
 export class LightListComponent implements OnInit {
-
-  constructor() { }
+  ipList$: Observable<string[]>
+  constructor(private lightSvc: LightStatusService) {
+    this.ipList$ = this.lightSvc.getIPList();
+  }
 
   ngOnInit(): void {
   }

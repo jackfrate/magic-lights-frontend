@@ -1,8 +1,8 @@
 <div class="main">
     <mat-toolbar>
-        <span>My Application</span>
+        <span>Lights and Shit</span>
     </mat-toolbar>
-    <mat-list>
-        
+    <mat-list *ngFor="let ip of (ipList$ | async); let i = index">
+        <app-light-holder [index]="i" [ip]="ip"></app-light-holder>
     </mat-list>
 </div>
