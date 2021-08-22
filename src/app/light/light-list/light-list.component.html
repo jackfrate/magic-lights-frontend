@@ -2,7 +2,7 @@
     <mat-toolbar>
         <span>Lights and Shit</span>
     </mat-toolbar>
-    <mat-list *ngFor="let ip of (ipList$ | async); let i = index">
+    <mat-list class="card-list" *ngFor="let ip of (ipList$ | async); let i = index">
         <app-light-holder [index]="i" [ip]="ip"></app-light-holder>
     </mat-list>
 </div>
