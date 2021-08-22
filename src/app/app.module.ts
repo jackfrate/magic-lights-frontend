@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LightHolderComponent } from './light/light-holder/light-holder.component';
 import { LightListComponent } from './light/light-list/light-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { LightListComponent } from './light/light-list/light-list.component';
     BrowserModule,
     NgxMatColorPickerModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
