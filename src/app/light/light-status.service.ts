@@ -35,14 +35,14 @@ export class LightStatusService {
     if (brightness === null) {
       brightness = 255;
     }
-    return this.http.post<MessageRes>(`${BASE_IP}/light_color`, {
+    return this.http.post<MessageRes>(`${BASE_IP}/light_bright`, {
       bright: brightness,
       index: index
     });
   }
 
   getStatus(index: number): Observable<LightStatus> {
-    return this.http.get<LightStatus>(`${BASE_IP}/light_status/${index}`)
+    return this.http.get<LightStatus>(`${BASE_IP}/light_status/${index}`);
   }
 
 }
