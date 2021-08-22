@@ -9,6 +9,14 @@ import { LightHolderComponent } from './light/light-holder/light-holder.componen
 import { LightListComponent } from './light/light-list/light-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// material 
+import { MatSliderModule } from '@angular/material/slider';
+import { MatListModule } from '@angular/material/list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +28,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgxMatColorPickerModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatSliderModule,
+    MatListModule,
+    MatSlideToggleModule,
+    MatToolbarModule,
   ],
   providers: [
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
