@@ -1,10 +1,11 @@
 import { Component, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
 import { ColorEvent, RGBA } from 'ngx-color';
-import { Observable, Subscription } from 'rxjs';
+import { interval, Observable, Subscription } from 'rxjs';
 import { LightStatus, RGB } from 'src/app/models/rgb';
 import { MessageRes } from 'src/stuff';
 import { LightStatusService } from '../light-status.service';
+import { throttle } from 'rxjs/operators';
 
 
 @Component({
@@ -51,7 +52,8 @@ export class LightHolderComponent {
   }
 
   onSliderChange(event: MatSliderChange) {
-    this.changeBrightness$ = this.lightSvc.changeBright(event.value, this.index).subscribe(
+    this.changeBrightness$ = this.lightSvc.changeBright(event.value, this.index)
+    .subscribe(
       value => {
         this.brightness = event.value
       }
@@ -65,3 +67,5 @@ export class LightHolderComponent {
   }
 
 }
+
+
