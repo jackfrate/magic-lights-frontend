@@ -22,18 +22,18 @@ export class LightHolderComponent {
   changeColor$: Subscription = new Subscription();
   changeBrightness$: Subscription = new Subscription();
 
-  color: RGBA = { r: 0, g: 0, b: 0, a: 0 };
+  color: RGBA = { r: 0, g: 0, b: 0, a: 255 };
   brightness: number | null = 255;
 
-  constructor(private lightSvc: LightStatusService) {
+  constructor(private lightSvc: LightStatusService) { }
+
+  ngOnInit() {
     this.status$ = this.getStatus()
       .subscribe(value => {
         // @ts-ignore
         this.color = value
         // this.color.a = 255;
-      }
-      );
-
+      });
   }
 
   getStatus() {
@@ -53,11 +53,11 @@ export class LightHolderComponent {
 
   onSliderChange(event: MatSliderChange) {
     this.changeBrightness$ = this.lightSvc.changeBright(event.value, this.index)
-    .subscribe(
-      value => {
-        this.brightness = event.value
-      }
-    );
+      .subscribe(
+        value => {
+          this.brightness = event.value
+        }
+      );
   }
 
   ngOnDestroy(): void {
